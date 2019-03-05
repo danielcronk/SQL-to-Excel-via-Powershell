@@ -32,7 +32,7 @@ DO {
 
     $badgeRead = Read-Host -Prompt 'Scan Badge or enter 0 to finish logging'
 
-    $query = "select LAST_NAME, FIRST_NAME, BADGEID, EMPLID from dbo.LenelBadges where dbo.LenelBadges.BADGEID like '$badgeRead'"
+    $query = "select LAST_NAME, FIRST_NAME, BADGEID, EMPLID from tableNameHere where columnNameHere like '$badgeRead'"
     $command = $connection.CreateCommand()
     $command.CommandText = $query
     $result = $command.ExecuteReader()
