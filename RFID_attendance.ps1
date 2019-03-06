@@ -6,10 +6,12 @@ $pwd = "password123"
 $connection = New-Object System.Data.SqlClient.SqlConnection
 $connection.ConnectionString = "Server = $SQLServer; Database = $DBName; uid = $usr; pwd = $pwd;"
 $connection.open()
+Write-Host "`nYou need to be in this window before scanning any badges. Make sure the reader beeps when a badge is scanned."
+Write-Host "Enter 0 at any time to exit the program - don't just close the window.`n"
 
 # set up Excel
 $excel = new-object -ComObject excel.application
-$excel.visible = $true 
+$excel.visible = $false
 $workbook = $excel.Workbooks.Add()
 $ws1 = $workbook.Worksheets.Item("Sheet1")
 $rng = $ws1.Range("B2","E2")
@@ -21,7 +23,6 @@ $rng.Font.Bold = $True
 $rng.Interior.ColorIndex = 33
 $usedRange = $ws1.UsedRange	
 $usedRange.EntireColumn.AutoFit() | Out-Null
-$row = 3
 
 #loop to read badges and write to excel
 
@@ -69,3 +70,5 @@ DO {
 
 
 $connection.Close()
+$excel.visible = $true
+Read-Host -Prompt "`nSave your excel file now before closing. Press Enter to exit or just close the window."
